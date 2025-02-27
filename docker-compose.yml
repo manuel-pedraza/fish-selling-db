@@ -5,9 +5,9 @@ services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=1.strongPwd
-      - MSSQL_PID=Developer
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "stR0ng#Th7ngY"
+      MSSQL_PID: "Developer"
     user: root
     ports:
       - 1433:1433
@@ -15,11 +15,11 @@ services:
       - sqlserver_data:/var/opt/mssql
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 1.strongPwd -C -Q 'SELECT 1' || exit 1"]
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P stR0ng#Th7ngY -C -Q 'SELECT 1' || exit 1"]
       interval: 10s
       retries: 10
       start_period: 10s
-      timeout: 3s
+      timeout: 5s
   sqlserver.configurator:
     image: mcr.microsoft.com/mssql/server:2022-latest
     user: root
@@ -30,6 +30,27 @@ services:
         condition: service_healthy
     command: >
       bash -c '
-      /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P 1.strongPwd -C -d master -i docker-entrypoint-initdb.d/FishSellingDB.sql;
+      touch docker-entrypoint-initdb.d/data.sql;
+      cat docker-entrypoint-initdb.d/FishSellingDB.sql > docker-entrypoint-initdb.d/data.sql;
+      echo "USE [FishSellingDB]" >> docker-entrypoint-initdb.d/data.sql;                  
+      echo "GO" >> docker-entrypoint-initdb.d/data.sql;                  
+      cat docker-entrypoint-initdb.d/tables/Species.sql >> docker-entrypoint-initdb.d/data.sql;
+      cat docker-entrypoint-initdb.d/tables/Fishermen.sql >> docker-entrypoint-initdb.d/data.sql;      
+      cat docker-entrypoint-initdb.d/tables/WaterBodyTypes.sql >> docker-entrypoint-initdb.d/data.sql; 
+      cat docker-entrypoint-initdb.d/tables/Customers.sql >> docker-entrypoint-initdb.d/data.sql;      
+      echo "GO" >> docker-entrypoint-initdb.d/data.sql;                     
+      cat docker-entrypoint-initdb.d/tables/Catches.sql >> docker-entrypoint-initdb.d/data.sql;     
+      cat docker-entrypoint-initdb.d/tables/WaterBodies.sql >> docker-entrypoint-initdb.d/data.sql;     
+      cat docker-entrypoint-initdb.d/tables/Orders.sql >> docker-entrypoint-initdb.d/data.sql;          
+      cat docker-entrypoint-initdb.d/tables/Fish.sql >> docker-entrypoint-initdb.d/data.sql;            
+      echo "GO" >> docker-entrypoint-initdb.d/data.sql;                              
+      cat docker-entrypoint-initdb.d/tables/Habitats.sql >> docker-entrypoint-initdb.d/data.sql;        
+      cat docker-entrypoint-initdb.d/tables/Locations.sql >> docker-entrypoint-initdb.d/data.sql;       
+      echo "GO" >> docker-entrypoint-initdb.d/data.sql;                              
+      cat docker-entrypoint-initdb.d/tables/FishCatch.sql >> docker-entrypoint-initdb.d/data.sql;       
+      echo "GO" >> docker-entrypoint-initdb.d/data.sql;                              
+      cat docker-entrypoint-initdb.d/tables/FishOrder.sql >> docker-entrypoint-initdb.d/data.sql;       
+      echo "GO" >> docker-entrypoint-initdb.d/data.sql;    
+      /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P stR0ng#Th7ngY -C -d master -i docker-entrypoint-initdb.d/data.sql;
       echo "All done!";
       '

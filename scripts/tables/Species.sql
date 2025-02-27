@@ -1,6 +1,3 @@
-USE [FishSellingDB]
-GO
-
 INSERT INTO [dbo].[Species] (id, [name]) VALUES (1,'Catfish')
 INSERT INTO [dbo].[Species] (id, [name]) VALUES (2,'Carp')
 INSERT INTO [dbo].[Species] (id, [name]) VALUES (3,'Trout')

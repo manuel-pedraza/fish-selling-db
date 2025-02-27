@@ -1,6 +1,3 @@
-USE [FishSellingDB]
-GO
-
 INSERT INTO [dbo].[WaterBodyTypes] ([id],[typeName],[size],[description]) VALUES (1, 'Ocean', 'Large', 'The largest body of saltwater, covering most of the Earth''s surface.')
 INSERT INTO [dbo].[WaterBodyTypes] ([id],[typeName],[size],[description]) VALUES (2, 'Sea', 'Large', 'A large saltwater body, smaller than an ocean, often partly enclosed by land.')
 INSERT INTO [dbo].[WaterBodyTypes] ([id],[typeName],[size],[description]) VALUES (3, 'Gulf', 'Large', 'A large portion of the sea partially enclosed by land.')
@@ -28,51 +25,3 @@ INSERT INTO [dbo].[WaterBodyTypes] ([id],[typeName],[size],[description]) VALUES
 INSERT INTO [dbo].[WaterBodyTypes] ([id],[typeName],[size],[description]) VALUES (21, 'Swamp', 'Small', 'A wetland dominated by trees and standing or slow-moving water.')
 INSERT INTO [dbo].[WaterBodyTypes] ([id],[typeName],[size],[description]) VALUES (22, 'Canal', 'Long', 'A man-made waterway for transportation or irrigation.')
 INSERT INTO [dbo].[WaterBodyTypes] ([id],[typeName],[size],[description]) VALUES (23, 'Strait', 'Small', 'A narrow passage of water connecting two larger bodies of water.')
-
-
-GO
-
-
-
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Catfish')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Carp')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Trout')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Pike')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Perch')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Tilapia')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Sturgeon')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Guppy')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Tetra')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Tuna')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Mackerel')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Cod')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Snapper')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Grouper')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Halibut')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Flounder')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Marlin')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Swordfish')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Barracuda')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Great ')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Shark')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Tiger Shark')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Hammerhead')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Bull Shark')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Whale Shark')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Manta Ray')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Stingray')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Sawfish')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Clownfish')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Angelfish')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Parrotfish')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Butterflyfish')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Tang')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Wrasse')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Goby')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Mandarinfish')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Coelacanth')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Lungfish')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Paddlefish')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Archerfish')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Electric Eel')
-INSERT INTO [dbo].[Species] ([name]) VALUES ('Arowana')
