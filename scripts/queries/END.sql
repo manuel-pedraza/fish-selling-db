@@ -1,0 +1,3 @@
+GO
+USE [master]
+GO
