@@ -30,27 +30,7 @@ services:
         condition: service_healthy
     command: >
       bash -c '
-      touch docker-entrypoint-initdb.d/data.sql;
-      cat docker-entrypoint-initdb.d/FishSellingDB.sql > docker-entrypoint-initdb.d/data.sql;
-      echo "USE [FishSellingDB]" >> docker-entrypoint-initdb.d/data.sql;                  
-      echo "GO" >> docker-entrypoint-initdb.d/data.sql;                  
-      cat docker-entrypoint-initdb.d/tables/Species.sql >> docker-entrypoint-initdb.d/data.sql;
-      cat docker-entrypoint-initdb.d/tables/Fishermen.sql >> docker-entrypoint-initdb.d/data.sql;      
-      cat docker-entrypoint-initdb.d/tables/WaterBodyTypes.sql >> docker-entrypoint-initdb.d/data.sql; 
-      cat docker-entrypoint-initdb.d/tables/Customers.sql >> docker-entrypoint-initdb.d/data.sql;      
-      echo "GO" >> docker-entrypoint-initdb.d/data.sql;                     
-      cat docker-entrypoint-initdb.d/tables/Catches.sql >> docker-entrypoint-initdb.d/data.sql;     
-      cat docker-entrypoint-initdb.d/tables/WaterBodies.sql >> docker-entrypoint-initdb.d/data.sql;     
-      cat docker-entrypoint-initdb.d/tables/Orders.sql >> docker-entrypoint-initdb.d/data.sql;          
-      cat docker-entrypoint-initdb.d/tables/Fish.sql >> docker-entrypoint-initdb.d/data.sql;            
-      echo "GO" >> docker-entrypoint-initdb.d/data.sql;                              
-      cat docker-entrypoint-initdb.d/tables/Habitats.sql >> docker-entrypoint-initdb.d/data.sql;        
-      cat docker-entrypoint-initdb.d/tables/Locations.sql >> docker-entrypoint-initdb.d/data.sql;       
-      echo "GO" >> docker-entrypoint-initdb.d/data.sql;                              
-      cat docker-entrypoint-initdb.d/tables/FishCatch.sql >> docker-entrypoint-initdb.d/data.sql;       
-      echo "GO" >> docker-entrypoint-initdb.d/data.sql;                              
-      cat docker-entrypoint-initdb.d/tables/FishOrder.sql >> docker-entrypoint-initdb.d/data.sql;       
-      echo "GO" >> docker-entrypoint-initdb.d/data.sql;    
-      /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P stR0ng#Th7ngY -C -d master -i docker-entrypoint-initdb.d/data.sql;
+      /bin/bash /docker-entrypoint-initdb.d/initDB.sh;
+      cd /docker-entrypoint-initdb.d/queries && pwd && /bin/bash ./setAllQueries.sh && cd ../..;
       echo "All done!";
       '

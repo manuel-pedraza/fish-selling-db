@@ -6,6 +6,6 @@ for ((i=1;i<=$numOfDirs;i++)); do
     file="./${dir}all${i}queries.sql"
     touch $file
     cat ./START.sql > $file
-    cat ./${dir}Q*.sql >> $file
+    find ./${dir} -type f -name "Q*.sql" | sort -V | xargs cat >> $file
     cat ./END.sql >> $file
 done

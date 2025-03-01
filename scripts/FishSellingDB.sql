@@ -144,7 +144,7 @@ CREATE TABLE [dbo].[FishCatch]
 	[id] [int] NOT NULL,
 	[quantity] [int] NOT NULL,
 	[weight] [decimal](18, 0) NULL,
-	[timestamp] [date] NULL,
+	[time] [time](3) NULL,
 	[fishId] [int] NOT NULL,
 	[locationId] [int] NOT NULL,
 	[catchId] [int] NOT NULL,
