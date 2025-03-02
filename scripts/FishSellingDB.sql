@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [FishSellingDB]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Database [FishSellingDB]    Script Date: 3/1/2025 10:38:40 PM ******/
 CREATE DATABASE [FishSellingDB]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -84,7 +84,28 @@ ALTER DATABASE [FishSellingDB] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLE
 GO
 USE [FishSellingDB]
 GO
-/****** Object:  Table [dbo].[Catches]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[Addresses]    Script Date: 3/1/2025 10:38:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Addresses]
+(
+	[id] [int] NOT NULL,
+	[worldRegion] [nvarchar](50) NOT NULL,
+	[country] [nvarchar](50) NOT NULL,
+	[stateProvince] [nvarchar](50) NULL,
+	[city] [nvarchar](50) NULL,
+	[postalCode] [nvarchar](50) NULL,
+	[addressLine1] [nvarchar](50) NULL,
+	[addressLine2] [nvarchar](50) NULL,
+	CONSTRAINT [PK_Addresses] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Catches]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -100,7 +121,7 @@ CREATE TABLE [dbo].[Catches]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Customers]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[Customers]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -111,13 +132,14 @@ CREATE TABLE [dbo].[Customers]
 	[firstName] [nvarchar](50) NULL,
 	[lastName] [nvarchar](50) NULL,
 	[age] [smallint] NULL,
+	[addressId] [int] NULL,
 	CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Fish]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[Fish]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -134,7 +156,7 @@ CREATE TABLE [dbo].[Fish]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FishCatch]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[FishCatch]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -154,7 +176,7 @@ CREATE TABLE [dbo].[FishCatch]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Fishermen]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[Fishermen]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -165,13 +187,14 @@ CREATE TABLE [dbo].[Fishermen]
 	[firstName] [nvarchar](50) NULL,
 	[lastName] [nvarchar](50) NULL,
 	[age] [smallint] NULL,
+	[addressId] [int] NULL,
 	CONSTRAINT [PK_Fishermen] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FishOrder]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[FishOrder]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -190,7 +213,7 @@ CREATE TABLE [dbo].[FishOrder]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Habitats]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[Habitats]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -201,7 +224,7 @@ CREATE TABLE [dbo].[Habitats]
 	[waterBodyId] [int] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Locations]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[Locations]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -218,7 +241,7 @@ CREATE TABLE [dbo].[Locations]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Orders]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[Orders]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -235,7 +258,7 @@ CREATE TABLE [dbo].[Orders]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Species]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[Species]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -244,13 +267,14 @@ CREATE TABLE [dbo].[Species]
 (
 	[id] [int] NOT NULL,
 	[name] [nvarchar](50) NOT NULL,
+	[parentSpeciesId] [int] NULL,
 	CONSTRAINT [PK_Species] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[WaterBodies]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[WaterBodies]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -266,7 +290,7 @@ CREATE TABLE [dbo].[WaterBodies]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[WaterBodyTypes]    Script Date: 2/25/2025 9:02:59 PM ******/
+/****** Object:  Table [dbo].[WaterBodyTypes]    Script Date: 3/1/2025 10:38:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -288,6 +312,11 @@ REFERENCES [dbo].[Fishermen] ([id])
 GO
 ALTER TABLE [dbo].[Catches] CHECK CONSTRAINT [FK_Catches_Fishermen]
 GO
+ALTER TABLE [dbo].[Customers]  WITH CHECK ADD  CONSTRAINT [FK_Customers_Addresses] FOREIGN KEY([addressId])
+REFERENCES [dbo].[Addresses] ([id])
+GO
+ALTER TABLE [dbo].[Customers] CHECK CONSTRAINT [FK_Customers_Addresses]
+GO
 ALTER TABLE [dbo].[Fish]  WITH CHECK ADD  CONSTRAINT [FK_Fish_Species] FOREIGN KEY([speciesId])
 REFERENCES [dbo].[Species] ([id])
 GO
@@ -307,6 +336,11 @@ ALTER TABLE [dbo].[FishCatch]  WITH CHECK ADD  CONSTRAINT [FK_FishCatch_Location
 REFERENCES [dbo].[Locations] ([id])
 GO
 ALTER TABLE [dbo].[FishCatch] CHECK CONSTRAINT [FK_FishCatch_Locations]
+GO
+ALTER TABLE [dbo].[Fishermen]  WITH CHECK ADD  CONSTRAINT [FK_Fishermen_Addresses] FOREIGN KEY([addressId])
+REFERENCES [dbo].[Addresses] ([id])
+GO
+ALTER TABLE [dbo].[Fishermen] CHECK CONSTRAINT [FK_Fishermen_Addresses]
 GO
 ALTER TABLE [dbo].[FishOrder]  WITH CHECK ADD  CONSTRAINT [FK_FishOrder_FishCatch] FOREIGN KEY([fishCatchId])
 REFERENCES [dbo].[FishCatch] ([id])
@@ -337,6 +371,11 @@ ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_Customers] FOR
 REFERENCES [dbo].[Customers] ([id])
 GO
 ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_Customers]
+GO
+ALTER TABLE [dbo].[Species]  WITH CHECK ADD  CONSTRAINT [FK_Species_Species] FOREIGN KEY([parentSpeciesId])
+REFERENCES [dbo].[Species] ([id])
+GO
+ALTER TABLE [dbo].[Species] CHECK CONSTRAINT [FK_Species_Species]
 GO
 ALTER TABLE [dbo].[WaterBodies]  WITH CHECK ADD  CONSTRAINT [FK_WaterBodies_WaterBodiesTypes] FOREIGN KEY([typeId])
 REFERENCES [dbo].[WaterBodyTypes] ([id])

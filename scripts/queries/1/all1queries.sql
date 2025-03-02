@@ -84,6 +84,18 @@ HAVING COUNT(o.id) > 1
 SELECT TOP 3 *
 FROM FishOrder AS fo
 ORDER BY fo.price DESC
+--11. Search all fishermen and users from the USA
+SELECT * 
+FROM Addresses AS a 
+INNER JOIN Customers AS c ON a.id = c.addressId
+INNER JOIN Fishermen AS fm ON a.id = fm.addressId 
+WHERE a.country = 'United States'
+--12. Search all fishermen and users from the Asia Region
+SELECT *
+FROM Addresses AS a
+    INNER JOIN Customers AS c ON a.id = c.addressId
+    INNER JOIN Fishermen AS fm ON a.id = fm.addressId
+WHERE a.country LIKE '%asia%'
 GO
 USE [master]
 GO

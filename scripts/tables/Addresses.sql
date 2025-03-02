@@ -398,4 +398,5 @@ INSERT INTO Addresses (id, worldRegion, country, stateProvince, city, postalCode
 INSERT INTO Addresses (id, worldRegion, country, stateProvince, city, postalCode, addressLine1, addressLine2) VALUES (398, 'Europe and Central Asia', 'France', 'Provence-Alpes-Côte d''Azur', 'Aubagne', '13674 CEDEX', '423 Heath Point', '74 Shoshone Pass');
 INSERT INTO Addresses (id, worldRegion, country, stateProvince, city, postalCode, addressLine1, addressLine2) VALUES (399, 'East Asia and Pacific', 'Indonesia', null, 'South Tangerang', null, '1 Westridge Place', '8247 Del Mar Place');
 INSERT INTO Addresses (id, worldRegion, country, stateProvince, city, postalCode, addressLine1, addressLine2) VALUES (400, 'Europe and Central Asia', 'Portugal', 'Lisboa', 'Carregado', '2580-466', '92 Sullivan Drive', '5 Stone Corner Circle');
+INSERT INTO Addresses (id, worldRegion, country, stateProvince, city, postalCode, addressLine1, addressLine2) VALUES (401, 'Europe and Central Asia', 'Macedonia', null, 'Sedlarevo', '1231', '738 Judy Park', '2 Charing Cross Road');
 
