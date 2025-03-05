@@ -16,4 +16,4 @@ HAVING SUM(fo.price) > (
             GROUP BY fm2.id
     ) AS tb
 )
-ORDER BY amount DESC
+ORDER BY amount DESC;

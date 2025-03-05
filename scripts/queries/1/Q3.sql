@@ -7,4 +7,4 @@ WHERE c.id IS NULL
 SELECT *
 FROM Fishermen AS fm
     FULL OUTER JOIN Catches AS c ON c.fishermanId = fm.id
-WHERE c.id IS NULL
+WHERE c.id IS NULL;

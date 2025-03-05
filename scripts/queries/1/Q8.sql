@@ -2,4 +2,4 @@
 SELECT *
 FROM Orders
 WHERE dateToDeliver > '20120101' AND dateToDeliver < '20250225' AND wasDelivered = 1
-ORDER BY dateToDeliver
+ORDER BY dateToDeliver;

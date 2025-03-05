@@ -9,4 +9,4 @@ UNION ALL
 SELECT * 
 FROM Addresses AS a 
 INNER JOIN Fishermen AS fm ON a.id = fm.addressId
-WHERE a.country = 'United States'
+WHERE a.country = 'United States';

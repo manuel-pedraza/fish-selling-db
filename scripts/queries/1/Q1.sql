@@ -4,4 +4,4 @@ FROM Species AS sp
     INNER JOIN Habitats AS h ON h.speciesId = sp.id
     INNER JOIN WaterBodies AS wb ON wb.id = h.waterBodyId
     INNER JOIN WaterBodyTypes AS wbt ON wbt.id = wb.typeId
-WHERE wbt.typeName = 'Bay'
+WHERE wbt.typeName = 'Bay';
