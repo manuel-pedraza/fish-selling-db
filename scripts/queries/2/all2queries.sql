@@ -33,10 +33,10 @@ INNER JOIN Addresses AS a ON a.id = fm.addressId
 INNER JOIN Orders AS o ON o.id = fo.orderId
 WHERE a.country = 'United States' OR a.country = 'Canada'
 GROUP BY a.stateProvince;
---4.	Show the revenue of each FishOrder without doing any group by.
+--3. Show the revenue of each FishOrder without doing any group by.
 SELECT fo.price,
     100 * fo.price / SUM(fo.price) OVER() AS 'Percentage'
-FROM FishOrder AS fo;--5. For each customer, show all of the order's price and show the cumulative total
+FROM FishOrder AS fo;--4. For each customer, show all of the order's price and show the cumulative total
 WITH OrderPrices AS
 (
     SELECT o.id, SUM(fo.price) AS total_price
@@ -50,7 +50,7 @@ SELECT o.customerId, op.total_price AS 'Order Price',
 FROM Orders AS o
 INNER JOIN OrderPrices AS op ON o.id = op.id
 ORDER BY o.customerId;
---7. Show all the North Americans who have bought other fish than Sturgeon (Using except)
+--5. Show all the North Americans who have bought other fish than Sturgeon (Using except)
 WITH SpeciesRecursive AS
 (
     SELECT id, parentSpeciesId, name
@@ -84,6 +84,14 @@ INNER JOIN FishCatch AS fc ON fo.fishCatchId = fc.id
 INNER JOIN Fish AS f ON f.id = fc.fishId
 INNER JOIN SpeciesRecursive AS sr ON sr.id = f.speciesId
 WHERE a.worldRegion LIKE 'North America';
-GO
+--6. Show the history of fish catched in a journey for catches that have 2 or more fishCatch
+SELECT fc.*
+FROM FishCatch AS fc
+    INNER JOIN (
+	SELECT fc2.catchId AS cId, COUNT(fc2.catchId) AS nb_of_catches
+    FROM FishCatch AS fc2
+    GROUP BY fc2.catchId
+    HAVING COUNT(fc2.catchId) > 1
+) AS total_catches ON fc.catchId = total_catches.cIdGO
 USE [master]
 GO

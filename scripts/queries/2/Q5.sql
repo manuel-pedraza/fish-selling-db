@@ -1,4 +1,4 @@
---7. Show all the North Americans who have bought other fish than Sturgeon (Using except)
+--5. Show all the North Americans who have bought other fish than Sturgeon (Using except)
 WITH SpeciesRecursive AS
 (
     SELECT id, parentSpeciesId, name

@@ -1,4 +1,4 @@
---5. For each customer, show all of the order's price and show the cumulative total
+--4. For each customer, show all of the order's price and show the cumulative total
 WITH OrderPrices AS
 (
     SELECT o.id, SUM(fo.price) AS total_price
