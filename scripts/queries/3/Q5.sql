@@ -1,4 +1,5 @@
---5. Get the regional numbers of the phone numbers (only work for ### ### ####, ###-###-####)
+--5. Get the regional numbers of the phone numbers (only work for ### ### ####, ###-###-####) 
+-- NOTE: THIS COULD BE BETTER
 SELECT con.phoneNumber1, con.phoneNumber2,
 	CASE 
 		WHEN LEN(phoneNumber1) = 12 THEN LEFT(phoneNumber1, 3)

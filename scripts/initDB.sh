@@ -7,6 +7,7 @@ echo "USE [FishSellingDB]" >> $data;
 echo "GO" >> $data;
 cat ${dir}tables/Species.sql >> $data;
 cat ${dir}tables/WaterBodyTypes.sql >> $data;
+cat ${dir}tables/Contacts.sql >> $data;
 cat ${dir}tables/Addresses.sql >> $data;
 echo "GO" >> $data;
 cat ${dir}tables/Fishermen.sql >> $data;

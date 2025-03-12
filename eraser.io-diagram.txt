@@ -1,0 +1,131 @@
+Species [color: green] {
+  id int pk 
+  name string
+}
+
+Habitats [color: green] {
+  waterBodyId int fk
+  speciesId int fk
+}
+
+ErrorLog [color: black] {
+  userName string
+  errorNumber string
+  errorSeverity string
+  errorState string
+  errorProcedure string
+  errorLine string
+  errorMessage string
+}
+
+WaterBodies [color: green] {
+  id int pk
+  name string
+  typeId int fk
+}
+
+WaterBodyTypes [color: green] {
+  id int pk
+  typeName string
+  size string
+  description string
+}
+
+Locations [color: green] {
+  id int pk
+  waterBodyId int fk
+  x decimal 
+  y decimal
+}
+
+FishCatch [color: blue] {
+  id int pk
+  fishId int fk
+  catchId int fk
+  locationId int fk
+  quantity int
+  weight decimal
+  timestamp timestamp
+}
+
+Customers [color: red, icon: user] {
+  id int pk
+  firstName string
+  lastName string
+  age byte
+  addressId int fk
+}
+
+Fishermen [icon: user, color: blue] {
+  id int pk
+  firstName string
+  lastName string
+  age byte
+  addressId int fk
+}
+
+Catches [color: blue] {
+  id string pk
+  fishermanId int fk
+  date date
+}
+
+Orders [color: red] {
+  id int pk
+  customerId int fk
+  dateToDeliver date
+  wasDelivered bool
+}
+
+FishOrder [color: red] {
+  id int pk
+  fishCatchId int fk
+  orderId int fk
+  quantity int
+  weight decimal
+  price decimal
+}
+
+Fish [color: blue] {
+  id int pk
+  name string
+  speciesId int fk
+  color string
+  length decimal
+}
+
+Addresses [color: yellow] {
+  id int pk
+  worldRegion string
+  country string
+  stateProvince string
+  city string
+  postalCode string
+  addressLine1 string
+  addressLine2 string
+
+}
+
+Contacts [color: yellow] {
+  id int pk
+  email string
+  phoneNumber1 string
+  phoneNumber2 string
+}
+
+Fishermen.id < Catches.fishermanId
+Catches.id < FishCatch.catchId
+Fish.id < FishCatch.fishId
+Fish.speciesId > Species.id
+Locations.id <> FishCatch.locationId
+Locations.waterBodyId > WaterBodies.id
+Habitats.speciesId < Species.id
+WaterBodies.id > Habitats.waterBodyId
+FishOrder.fishCatchId <> FishCatch.id
+FishOrder.orderId > Orders.id
+Customers.id < Orders.customerId
+WaterBodyTypes.id > WaterBodies.typeId
+Addresses.id - Fishermen.addressId
+Addresses.id - Customers.addressId
+Contacts.id - Fishermen.contactId
+Contacts.id - Customers.contactId
