@@ -3,6 +3,8 @@
 ## Introduction
 The **FishSelling Database** is a structured system designed to manage and store information related to fish catches, suppliers(AKA fishermen), customers, and transactions. 
 
+## Diagram
+<img src="db_diagram.svg">
 <!--
 ## Features
 - Store and manage fish species, prices, and availability
