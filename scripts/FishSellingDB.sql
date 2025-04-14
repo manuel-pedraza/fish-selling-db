@@ -169,7 +169,7 @@ CREATE TABLE [dbo].[ErrorLogs]
 	[errorNumber] [int] NOT NULL,
 	[errorSeverity] [int] NOT NULL,
 	[errorState] [int] NOT NULL,
-	[errorProcedure] [int] NULL,
+	[errorProcedure] [nvarchar](50) NULL,
 	[errorLine] [int] NOT NULL,
 	[errorMessage] [nvarchar](50) NOT NULL,
 	CONSTRAINT [PK_ErrorLogs] PRIMARY KEY CLUSTERED 
