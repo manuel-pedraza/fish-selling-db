@@ -10,11 +10,11 @@ Habitats [color: green] {
 
 ErrorLog [color: black] {
   userName string
-  errorNumber string
-  errorSeverity string
-  errorState string
+  errorNumber int
+  errorSeverity int
+  errorState int
   errorProcedure string
-  errorLine string
+  errorLine int
   errorMessage string
 }
 
