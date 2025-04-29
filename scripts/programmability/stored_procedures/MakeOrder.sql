@@ -20,7 +20,7 @@ BEGIN
     -- SET NOCOUNT ON added to prevent extra result sets from
     -- interfering with SELECT statements.
     SET NOCOUNT ON;
-	SET XACT_ABORT ON;
+	-- SET XACT_ABORT ON;
 
 	BEGIN TRANSACTION MakeOrderTrans;
 
@@ -28,11 +28,11 @@ BEGIN
 
 		-- Validate the fish_id
 		IF NOT EXISTS(
-			SELECT f.id
-            FROM Fish AS f
-            WHERE f.id = @fish_id
+			SELECT fc.id
+			FROM FishCatch AS fc
+			WHERE fc.id = @fishCatch_id
 		)
-			RAISERROR('Invalid fish ID', 15, 10);
+			RAISERROR('Invalid fish catch ID', 15, 10);
 		
 		-- Validate the customer_id
 		IF NOT EXISTS(
@@ -47,22 +47,33 @@ BEGIN
 			RAISERROR('Invalid date', 15, 10);
 		
 		-- Validates if weight is lesser than fish catch weight
-		IF @weight > (SELECT fc.weight FROM FishCatch AS fc WHERE fc.id = @fishCatch_id)
+		IF @weight > (
+			SELECT fc.weight
+			FROM FishCatch AS fc
+			WHERE fc.id = @fishCatch_id
+		)
 			RAISERROR('Invalid weight', 15, 10);
 
-		IF @weight > (SELECT fc.quantity FROM FishCatch AS fc WHERE fc.id = @fishCatch_id)
+		IF @quantity > (
+			SELECT fc.quantity
+			FROM FishCatch AS fc
+			WHERE fc.id = @fishCatch_id
+		)
 			RAISERROR('Invalid quantity', 15, 10);
 
+		INSERT INTO FishSellingDB.dbo.Orders (customerId, dateToDeliver, wasDelivered)
+		VALUES ( @customer_id, @dtd, 0);
 		DECLARE @newOrderId INT;
-		INSERT INTO FishSellingDB.dbo.Orders(customerId, dateToDeliver, wasDelivered)
-		OUTPUT INSERTED.id INTO @newOrderId
-		VALUES (@customer_id, dtd, false);
+		SET @newOrderId = SCOPE_IDENTITY();
 
 		INSERT INTO FishSellingDB.dbo.FishOrder (fishCatchId, quantity, weight, price, orderId)
 		VALUES (@fishCatch_id, @quantity, @weight, @price, @newOrderId);
 
+		COMMIT TRANSACTION MakeOrderTrans;
+		
 	END TRY
 	BEGIN CATCH
+		ROLLBACK TRANSACTION MakeOrderTrans;
 		EXEC FishSellingDB.dbo.ErrorLogger
 		EXEC FishSellingDB.dbo.PrintError
 	END CATCH
